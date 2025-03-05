@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Tags Manager</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%236366f1' d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 16H6c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1h12c.55 0 1 .45 1 1v12c0 .55-.45 1-1 1zM12 17l4-4h-3V9h-2v4H8l4 4z'/%3E%3C/svg%3E">
+</head>
+<body>
+    <div class="container">
+        <h1>Image Tags Manager</h1>
+        
+        <div class="section-header">
+            <h2>Upload Images</h2>
+        </div>
+        
+        <div class="upload-section">
+            <div class="upload-area" id="uploadArea">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p>拖放图片到这里或点击上传</p>
+                <span class="max-files">最多50张图片</span>
+                <input type="file" id="fileInput" multiple accept="image/*" style="display: none;">
+            </div>
+            <button id="uploadBtn" class="btn primary">选择图片</button>
+        </div>
+
+        <div class="section-header">
+            <h2>Search & Download</h2>
+        </div>
+        
+        <div class="controls">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="搜索注释...">
+                <i class="fas fa-search"></i>
+            </div>
+            <button id="downloadBtn" class="btn secondary" disabled>
+                <i class="fas fa-download"></i> 下载所有图片
+            </button>
+        </div>
+
+        <div class="section-header">
+            <h2>Gallery</h2>
+            <div class="gallery-help">
+                <i class="fas fa-info-circle"></i>
+                <span>点击图片可以添加或编辑注释</span>
+            </div>
+        </div>
+        
+        <div class="image-gallery" id="imageGallery">
+            <!-- Images will be displayed here -->
+            <div class="empty-gallery">
+                <i class="fas fa-images"></i>
+                <p>上传图片后将显示在这里</p>
+                <p class="gallery-tip">上传后点击图片可以添加注释</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Download Modal -->
+    <div class="modal" id="downloadModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="section-header modal-header">
+                <h2>下载选项</h2>
+            </div>
+            <div class="form-group">
+                <label for="renameFiles">统一重命名文件?</label>
+                <div class="toggle-switch">
+                    <input type="checkbox" id="renameFiles">
+                    <label for="renameFiles"></label>
+                </div>
+            </div>
+            <div class="form-group rename-options" style="display: none;">
+                <label for="baseFileName">基础文件名:</label>
+                <input type="text" id="baseFileName" placeholder="例如: image">
+                <p class="help-text">文件将被命名为: image-1.jpg, image-2.jpg, ...</p>
+            </div>
+            <div class="form-group">
+                <label for="includeNotes">包含注释?</label>
+                <div class="toggle-switch">
+                    <input type="checkbox" id="includeNotes" checked>
+                    <label for="includeNotes"></label>
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button id="cancelDownload" class="btn secondary">取消</button>
+                <button id="confirmDownload" class="btn primary">下载</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Preview Modal -->
+    <div class="modal" id="imageModal">
+        <div class="modal-content image-modal-content">
+            <span class="close">&times;</span>
+            <div class="image-preview-container">
+                <img id="previewImage" src="" alt="Preview">
+            </div>
+            <div class="image-notes">
+                <div class="section-header">
+                    <h3>图片注释</h3>
+                </div>
+                <textarea id="imageNotes" placeholder="在这里添加图片注释..."></textarea>
+                <div class="notes-help">添加注释后点击"保存注释"按钮</div>
+                <button id="saveNotes" class="btn primary">保存注释</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Image Tags Manager - 一个简单易用的图片管理工具</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
